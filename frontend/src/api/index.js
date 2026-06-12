@@ -60,5 +60,40 @@ export default {
   // 删除收藏
   deleteFavorite(id) {
     return api.delete(`/favorites/${id}`)
+  },
+
+  // 获取安全公告列表
+  getSecurityAdvisories(params = {}) {
+    return api.get('/security/advisories', { params })
+  },
+
+  // 获取安全公告详情
+  getSecurityAdvisory(id) {
+    return api.get(`/security/advisories/${id}`)
+  },
+
+  // 创建安全公告
+  createSecurityAdvisory(data) {
+    return api.post('/security/advisories', data)
+  },
+
+  // 更新安全公告
+  updateSecurityAdvisory(id, data) {
+    return api.put(`/security/advisories/${id}`, data)
+  },
+
+  // 更新安全公告状态
+  updateSecurityAdvisoryStatus(id, status) {
+    return api.patch(`/security/advisories/${id}/status`, { status })
+  },
+
+  // 删除安全公告
+  deleteSecurityAdvisory(id) {
+    return api.delete(`/security/advisories/${id}`)
+  },
+
+  // 匹配安全公告
+  matchSecurityAdvisories(keyword) {
+    return api.get(`/security/match/${encodeURIComponent(keyword)}`)
   }
 }

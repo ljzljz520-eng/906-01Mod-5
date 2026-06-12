@@ -47,6 +47,32 @@ elseif (preg_match('#^/api/favorites/(\d+)$#', $uri, $matches) && $method === 'D
     $id = $matches[1];
     $api->deleteFavorite($id);
 }
+elseif ($uri === '/api/security/advisories' && $method === 'GET') {
+    $api->getSecurityAdvisories();
+}
+elseif ($uri === '/api/security/advisories' && $method === 'POST') {
+    $api->createSecurityAdvisory();
+}
+elseif (preg_match('#^/api/security/advisories/(\d+)$#', $uri, $matches) && $method === 'GET') {
+    $id = $matches[1];
+    $api->getSecurityAdvisory($id);
+}
+elseif (preg_match('#^/api/security/advisories/(\d+)$#', $uri, $matches) && $method === 'PUT') {
+    $id = $matches[1];
+    $api->updateSecurityAdvisory($id);
+}
+elseif (preg_match('#^/api/security/advisories/(\d+)/status$#', $uri, $matches) && $method === 'PATCH') {
+    $id = $matches[1];
+    $api->updateSecurityAdvisoryStatus($id);
+}
+elseif (preg_match('#^/api/security/advisories/(\d+)$#', $uri, $matches) && $method === 'DELETE') {
+    $id = $matches[1];
+    $api->deleteSecurityAdvisory($id);
+}
+elseif (preg_match('#^/api/security/match/(.+)$#', $uri, $matches) && $method === 'GET') {
+    $keyword = $matches[1];
+    $api->matchSecurityAdvisories($keyword);
+}
 else {
     http_response_code(404);
     echo json_encode(["message" => "Endpoint not found", "uri" => $uri]);
